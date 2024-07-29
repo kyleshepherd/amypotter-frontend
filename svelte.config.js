@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-auto";
+import adapter from "@sveltejs/adapter-vercel";
 import autoprefixer from "autoprefixer";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 

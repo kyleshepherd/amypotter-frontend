@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "BNChesterPro";
+  src: url("/fonts/BNChesterPro.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gambarino";
+  src:
+    url("/fonts/Gambarino-Regular.woff2") format("woff2"),
+    url("/fonts/Gambarino-Regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+::selection {
+  @apply bg-black text-white;
+}

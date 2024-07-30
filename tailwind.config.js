@@ -17,6 +17,10 @@ export default {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
         display: ["Gambarino", ...defaultTheme.fontFamily.serif],
       },
+      screens: {
+        "3xl": "1600px",
+        "4xl": "1920px",
+      },
     },
   },
   plugins: [],

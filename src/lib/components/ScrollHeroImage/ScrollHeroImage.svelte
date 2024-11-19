@@ -29,7 +29,7 @@
 <svelte:window bind:innerHeight bind:scrollY />
 
 <div
-  class="relative inset-0 -z-10 h-lvh overflow-hidden"
+  class="relative inset-0 -z-10 h-dvh overflow-hidden"
   bind:this={imageContainer}
   style={`opacity: ${opacity}%;`}
 >

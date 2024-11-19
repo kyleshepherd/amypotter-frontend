@@ -14,6 +14,16 @@
   ];
 
   let navOpen = $state(false);
+
+  const openNav = () => {
+    navOpen = true;
+    document.body.classList.add("overflow-hidden");
+  };
+
+  const closeNav = () => {
+    navOpen = false;
+    document.body.classList.remove("overflow-hidden");
+  };
 </script>
 
 <header
@@ -36,10 +46,10 @@
       </a>
     {/each}
   </div>
-  <button class="sm:hidden" type="button" onclick={() => (navOpen = true)}>
+  <button class="sm:hidden" type="button" onclick={openNav}>
     <Menu classes="size-8" />
   </button>
 </header>
 {#if navOpen}
-  <MobileNav onCloseNav={() => (navOpen = false)} {links} />
+  <MobileNav onCloseNav={closeNav} {links} />
 {/if}

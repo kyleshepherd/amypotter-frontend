@@ -11,11 +11,11 @@
 </script>
 
 <div
-  class="w-dvh absolute inset-0 h-dvh bg-white sm:hidden"
+  class="w-dvh fixed inset-0 h-dvh bg-white sm:hidden"
   transition:fade={{ delay: 0, duration: 200 }}
 ></div>
 <div
-  class="absolute inset-0 h-dvh w-dvw bg-black p-3 text-white sm:hidden"
+  class="fixed inset-0 h-dvh w-dvw bg-black p-3 text-white sm:hidden"
   in:slide={{ delay: 250, duration: 450, axis: "y" }}
   out:slide={{ delay: 50, duration: 450, axis: "y" }}
 >

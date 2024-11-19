@@ -14,5 +14,17 @@ query GetHome {
       altText
     }
     scrollHeroAnchor
+    showcaseImages {
+      img {
+        asset {
+          assetId: _id
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+      altText
+    }
   }
 }

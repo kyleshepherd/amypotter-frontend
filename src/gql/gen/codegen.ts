@@ -242,6 +242,7 @@ export type Home = Document & {
   heroText?: Maybe<Scalars["String"]["output"]>;
   scrollHeroAnchor?: Maybe<Scalars["String"]["output"]>;
   scrollHeroImage?: Maybe<CustomImage>;
+  showcaseImages?: Maybe<Array<Maybe<CustomImage>>>;
 };
 
 export type HomeFilter = {
@@ -839,6 +840,38 @@ export type GetHomeQuery = {
         }
       | null
       | undefined;
+    showcaseImages?:
+      | Array<
+          | {
+              __typename?: "CustomImage";
+              altText?: string | null | undefined;
+              img?:
+                | {
+                    __typename?: "Image";
+                    asset?:
+                      | {
+                          __typename?: "SanityImageAsset";
+                          assetId?: string | null | undefined;
+                        }
+                      | null
+                      | undefined;
+                    hotspot?:
+                      | {
+                          __typename?: "SanityImageHotspot";
+                          x?: number | null | undefined;
+                          y?: number | null | undefined;
+                        }
+                      | null
+                      | undefined;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
   }>;
 };
 
@@ -859,6 +892,18 @@ export const GetHome = gql`
         altText
       }
       scrollHeroAnchor
+      showcaseImages {
+        img {
+          asset {
+            assetId: _id
+          }
+          hotspot {
+            x
+            y
+          }
+        }
+        altText
+      }
     }
   }
 `;

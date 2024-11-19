@@ -43,3 +43,43 @@ export const builderImageToUrl = (
 
   return img.url();
 };
+
+export const idToSource = (
+  imageId: string,
+  width?: number,
+  height?: number,
+  hotspotX: number = 0.5,
+  hotspotY: number = 0.5,
+): string => {
+  let imgX1 = builder
+    .image(imageId)
+    .auto("format")
+    .fit("crop")
+    .focalPoint(hotspotX, hotspotY)
+    .dpr(1);
+
+  if (width && width !== 0) {
+    imgX1 = imgX1.width(width);
+  }
+
+  if (height && height !== 0) {
+    imgX1 = imgX1.height(height);
+  }
+
+  let imgX2 = builder
+    .image(imageId)
+    .auto("format")
+    .fit("crop")
+    .focalPoint(hotspotX, hotspotY)
+    .dpr(2);
+
+  if (width && width !== 0) {
+    imgX2 = imgX2.width(width);
+  }
+
+  if (height && height !== 0) {
+    imgX2 = imgX2.height(height);
+  }
+
+  return `${imgX1.url()}, ${imgX2.url()} 2x`;
+};

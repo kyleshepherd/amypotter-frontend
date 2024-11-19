@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Image } from "../../../types";
-  import { builderImageToUrl } from "../../../utils/sanity";
+  import { builderImageToUrl, idToSource } from "../../../utils/sanity";
 
   interface Props {
     image: Image;
@@ -28,27 +28,41 @@
 
 <svelte:window bind:innerHeight bind:scrollY />
 
-<div
-  class="relative inset-0 -z-10 h-lvh overflow-hidden"
-  bind:this={imageContainer}
-  style={`opacity: ${opacity}%;`}
->
-  <div class="fixed inset-0">
-    <img
-      class="h-lvh w-full object-cover {anchor === 'top'
-        ? 'object-top'
-        : anchor === 'bottom'
-          ? 'object.bottom'
-          : 'object-center'}"
-      src={builderImageToUrl(
-        image.id,
-        2560,
-        undefined,
-        image.hotspot.x,
-        image.hotspot.y,
-        1,
-      )}
-      alt={image.altText}
-    />
+<div class="mb-[200lvh] overflow-hidden">
+  <div
+    class="fixed inset-0 -z-10 h-[200lvh]"
+    bind:this={imageContainer}
+    style={`opacity: ${opacity}%; transform: scale(${scale / 100});`}
+  >
+    <div class="fixed inset-0">
+      <picture>
+        <source
+          srcset={idToSource(
+            image.id,
+            3000,
+            undefined,
+            image.hotspot.x,
+            image.hotspot.y,
+          )}
+          media="min-width: 0px"
+        />
+        <img
+          class="h-[200lvh] w-full object-cover {anchor === 'top'
+            ? 'object-top'
+            : anchor === 'bottom'
+              ? 'object.bottom'
+              : 'object-center'}"
+          src={builderImageToUrl(
+            image.id,
+            3000,
+            undefined,
+            image.hotspot.x,
+            image.hotspot.y,
+            1,
+          )}
+          alt={image.altText}
+        />
+      </picture>
+    </div>
   </div>
 </div>

@@ -3,16 +3,20 @@
   import type { Image } from "../../../types";
   import { builderImageToUrl } from "../../../utils/sanity";
 
-  export let images: Image[];
+  interface Props {
+    images: Image[];
+  }
 
-  let scrollY: number;
+  let { images }: Props = $props();
+
+  let scrollY: number = $state();
   let scrollHeight: number;
-  let scrollPercentage = 0;
-  let heroScrollPercentage = 0;
-  let heroInnerHeight: number;
-  let width: number;
+  let scrollPercentage = $state(0);
+  let heroScrollPercentage = $state(0);
+  let heroInnerHeight: number = $state();
+  let width: number = $state();
 
-  $: isLarge = width >= 1280;
+  let isLarge = $derived(width >= 1280);
 
   onMount(() => {
     setScrollHeight();
@@ -33,8 +37,8 @@
   bind:scrollY
   bind:innerHeight={heroInnerHeight}
   bind:innerWidth={width}
-  on:resize={setScrollHeight}
-  on:scroll={setScrollPercentage}
+  onresize={setScrollHeight}
+  onscroll={setScrollPercentage}
 />
 
 <div

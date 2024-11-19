@@ -13,7 +13,7 @@
     },
   ];
 
-  let navOpen = false;
+  let navOpen = $state(false);
 </script>
 
 <header
@@ -36,7 +36,7 @@
       </a>
     {/each}
   </div>
-  <button class="sm:hidden" type="button" on:click={() => (navOpen = true)}>
+  <button class="sm:hidden" type="button" onclick={() => (navOpen = true)}>
     <Menu classes="size-8" />
   </button>
 </header>

@@ -8,20 +8,15 @@ export const load = async () => {
     query: GetHome,
   });
 
-  const images = data.data.allHome[0].scrollImages;
-
   const homeData: {
     heroText: string;
-    scrollImages: Image[];
+    scrollHeroImage: Image;
+    scrollHeroAnchor: string;
   } = {
     heroText: data.data.allHome[0].heroText ?? "",
-    scrollImages:
-      data.data.allHome[0].scrollImages?.map(img => customImageToType(img)) ||
-      [],
+    scrollHeroImage: customImageToType(data.data.allHome[0].scrollHeroImage),
+    scrollHeroAnchor: data.data.allHome[0].scrollHeroAnchor ?? "top",
   };
 
-  return {
-    heroText: homeData.heroText,
-    scrollImages: homeData.scrollImages,
-  };
+  return homeData;
 };

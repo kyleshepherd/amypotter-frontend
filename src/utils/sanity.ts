@@ -20,10 +20,10 @@ export const builder = imageUrlBuilder({
 
 export const builderImageToUrl = (
   imageId: string,
-  width: number,
-  height: number,
-  hotspotX: number,
-  hotspotY: number,
+  width?: number,
+  height?: number,
+  hotspotX: number = 0.5,
+  hotspotY: number = 0.5,
   dpr = 1,
 ): string => {
   let img = builder
@@ -33,11 +33,11 @@ export const builderImageToUrl = (
     .focalPoint(hotspotX, hotspotY)
     .dpr(dpr);
 
-  if (width !== 0) {
+  if (width && width !== 0) {
     img = img.width(width);
   }
 
-  if (height !== 0) {
+  if (height && height !== 0) {
     img = img.height(height);
   }
 

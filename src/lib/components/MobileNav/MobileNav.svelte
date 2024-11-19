@@ -1,19 +1,13 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
   import Close from "../icons/Close.svelte";
   import { fade, slide } from "svelte/transition";
 
-  const dispatch = createEventDispatcher();
-
-  const onNavClick = () => {
-    dispatch("onCloseNav");
-  };
-
   interface Props {
     links?: { href: string; label: string }[];
+    onCloseNav: () => void;
   }
 
-  let { links = [] }: Props = $props();
+  let { links = [], onCloseNav }: Props = $props();
 </script>
 
 <div
@@ -30,14 +24,14 @@
     out:fade={{ delay: 0, duration: 200 }}
   >
     <div class="flex items-center justify-between">
-      <a href="/" onclick={onNavClick}>
+      <a href="/" onclick={onCloseNav}>
         <p class="text-xs !leading-none sm:text-sm">
           <span class="font-medium uppercase">Amy Potter</span>
           <br />
           <span>Shoot Producer</span>
         </p>
       </a>
-      <button type="button" onclick={onNavClick}>
+      <button type="button" onclick={onCloseNav}>
         <Close classes="size-8" />
       </button>
     </div>
@@ -47,7 +41,7 @@
         <li
           class="border-b border-white py-4 font-display text-4xl last:border-none"
         >
-          <a href={link.href} onclick={onNavClick}>
+          <a href={link.href} onclick={onCloseNav}>
             {link.label}
           </a>
         </li>

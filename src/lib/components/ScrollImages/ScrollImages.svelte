@@ -9,12 +9,12 @@
 
   let { images }: Props = $props();
 
-  let scrollY: number = $state();
+  let scrollY: number = $state(0);
   let scrollHeight: number;
   let scrollPercentage = $state(0);
   let heroScrollPercentage = $state(0);
-  let heroInnerHeight: number = $state();
-  let width: number = $state();
+  let heroInnerHeight: number = $state(0);
+  let width: number = $state(0);
 
   let isLarge = $derived(width >= 1280);
 

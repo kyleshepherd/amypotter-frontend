@@ -41,5 +41,5 @@
   </button>
 </header>
 {#if navOpen}
-  <MobileNav on:onCloseNav={() => (navOpen = false)} {links} />
+  <MobileNav onCloseNav={() => (navOpen = false)} {links} />
 {/if}

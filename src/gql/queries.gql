@@ -1,0 +1,17 @@
+query GetHome {
+  allHome {
+    heroText
+    scrollImages {
+      img {
+        asset {
+          assetId: _id
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+      altText
+    }
+  }
+}

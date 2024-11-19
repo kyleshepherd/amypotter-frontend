@@ -1,5 +1,5 @@
 {
-  "name": "svelte-kit-skeleton",
+  "name": "amy-potter-frontend",
   "version": "0.1.0",
   "scripts": {
     "dev": "vite dev",
@@ -7,15 +7,24 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check --plugin-search-dir=. . && eslint .",
-    "format": "prettier --write --plugin-search-dir=. ."
+    "format": "prettier --write --plugin-search-dir=. .",
+    "gen": "graphql-codegen --config codegen.yaml"
   },
   "devDependencies": {
+    "@apollo/client": "^3.11.8",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/introspection": "^4.0.3",
+    "@graphql-codegen/typescript": "^4.0.9",
+    "@graphql-codegen/typescript-document-nodes": "^4.0.9",
+    "@graphql-codegen/typescript-operations": "^4.2.3",
+    "@sanity/image-url": "^1.0.2",
     "@sveltejs/adapter-auto": "^3.2.0",
     "@sveltejs/adapter-vercel": "^5.4.1",
     "@sveltejs/kit": "^2.5.5",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.12.0",
     "autoprefixer": "^10.4.19",
+    "cross-fetch": "^4.0.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.39.0",

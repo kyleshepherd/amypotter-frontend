@@ -1,0 +1,18 @@
+overwrite: true
+schema: https://jh4ghg2v.api.sanity.io/v2023-08-01/graphql/production/default
+documents: src/**/queries.gql
+generates:
+  src/gql/gen/codegen.ts:
+    config:
+      maybeValue: T | null | undefined
+      clientPath: ../apolloClient
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-document-nodes"
+  src/gql/gen/schema.json:
+    plugins:
+      - "introspection"
+hooks:
+  afterAllFileWrite:
+    - prettier --write

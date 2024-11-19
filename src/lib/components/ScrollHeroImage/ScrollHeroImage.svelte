@@ -29,13 +29,13 @@
 <svelte:window bind:innerHeight bind:scrollY />
 
 <div
-  class="relative inset-0 -z-10 h-dvh overflow-hidden"
+  class="relative inset-0 -z-10 h-lvh overflow-hidden"
   bind:this={imageContainer}
   style={`opacity: ${opacity}%;`}
 >
-  <div class="fixed inset-0" style={`transform: scale(${scale / 100});`}>
+  <div class="fixed inset-0">
     <img
-      class="h-full w-full object-cover {anchor === 'top'
+      class="h-lvh w-full object-cover {anchor === 'top'
         ? 'object-top'
         : anchor === 'bottom'
           ? 'object.bottom'

@@ -161,6 +161,7 @@
             {sizes}
             classes="h-full transform-gpu sm:h-auto"
             style={`transform: scale(${getScale(i)});`}
+            lazy={true}
           />
         </div>
       {/each}

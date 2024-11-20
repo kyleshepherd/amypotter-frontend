@@ -134,7 +134,7 @@
   >
     Work
   </h2>
-  <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+  <div class="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2">
     {#each works as work, i}
       <a
         class="group relative {i === 0 && works.length % 2 !== 0
@@ -152,6 +152,7 @@
               ? coverBigSizes
               : coverSmallSizes}
             classes="w-full"
+            lazy={true}
           />
         </div>
         <div class="absolute inset-0">
@@ -179,6 +180,7 @@
                 hotspotY={work.mainImage.hotspot.y}
                 sizes={mainSizes}
                 classes="w-full group-hover:scale-105 transform-gpu transition-transform duration-500"
+                lazy={true}
               />
             </div>
           </div>

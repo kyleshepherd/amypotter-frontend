@@ -26,6 +26,7 @@
     sizes: Sizes;
     classes?: string;
     style?: string;
+    lazy?: boolean;
   }
 
   let {
@@ -36,6 +37,7 @@
     sizes,
     classes,
     style,
+    lazy = false,
   }: Props = $props();
 </script>
 
@@ -112,5 +114,6 @@
     alt={altText}
     class={classes}
     {style}
+    loading={lazy ? "lazy" : "eager"}
   />
 </picture>

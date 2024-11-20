@@ -239,9 +239,10 @@ export type Home = Document & {
   _type?: Maybe<Scalars["String"]["output"]>;
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  /** Block of text displayed below the polaroid image block */
+  aboutText?: Maybe<Scalars["String"]["output"]>;
   heroText?: Maybe<Scalars["String"]["output"]>;
   polaroidImages?: Maybe<Array<Maybe<CustomImage>>>;
-  showcaseImages?: Maybe<Array<Maybe<CustomImage>>>;
 };
 
 export type HomeFilter = {
@@ -253,6 +254,7 @@ export type HomeFilter = {
   _rev?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
+  aboutText?: InputMaybe<StringFilter>;
   heroText?: InputMaybe<StringFilter>;
 };
 
@@ -263,6 +265,7 @@ export type HomeSorting = {
   _rev?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
+  aboutText?: InputMaybe<SortOrder>;
   heroText?: InputMaybe<SortOrder>;
 };
 
@@ -806,39 +809,8 @@ export type GetHomeQuery = {
   allHome: Array<{
     __typename?: "Home";
     heroText?: string | null | undefined;
+    aboutText?: string | null | undefined;
     polaroidImages?:
-      | Array<
-          | {
-              __typename?: "CustomImage";
-              altText?: string | null | undefined;
-              img?:
-                | {
-                    __typename?: "Image";
-                    asset?:
-                      | {
-                          __typename?: "SanityImageAsset";
-                          assetId?: string | null | undefined;
-                        }
-                      | null
-                      | undefined;
-                    hotspot?:
-                      | {
-                          __typename?: "SanityImageHotspot";
-                          x?: number | null | undefined;
-                          y?: number | null | undefined;
-                        }
-                      | null
-                      | undefined;
-                  }
-                | null
-                | undefined;
-            }
-          | null
-          | undefined
-        >
-      | null
-      | undefined;
-    showcaseImages?:
       | Array<
           | {
               __typename?: "CustomImage";
@@ -889,18 +861,7 @@ export const GetHome = gql`
         }
         altText
       }
-      showcaseImages {
-        img {
-          asset {
-            assetId: _id
-          }
-          hotspot {
-            x
-            y
-          }
-        }
-        altText
-      }
+      aboutText
     }
   }
 `;

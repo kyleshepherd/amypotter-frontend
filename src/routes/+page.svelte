@@ -1,5 +1,6 @@
 <script lang="ts">
   import Hero from "$lib/components/Hero/Hero.svelte";
+  import HomeAbout from "$lib/components/HomeAbout/HomeAbout.svelte";
   import PolaroidImages from "$lib/components/PolaroidImages/PolaroidImages.svelte";
   import type { PageData } from "./$types";
 
@@ -8,14 +9,9 @@
   }
 
   let { data }: Props = $props();
+  let { polaroidImages, heroText, aboutText } = data;
 </script>
 
-<Hero introText={data.heroText} />
-<!-- <ScrollHeroImage image={data.scrollHeroImage} anchor={data.scrollHeroAnchor} /> -->
-<PolaroidImages images={data.polaroidImages} />
-<div class="h-dvh bg-white">
-  <h1>just more page content</h1>
-</div>
-<div class="h-dvh bg-white">
-  <h1>just more page content</h1>
-</div>
+<Hero introText={heroText} />
+<PolaroidImages images={polaroidImages} />
+<HomeAbout text={aboutText} />

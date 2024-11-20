@@ -13,17 +13,6 @@ query GetHome {
       }
       altText
     }
-    showcaseImages {
-      img {
-        asset {
-          assetId: _id
-        }
-        hotspot {
-          x
-          y
-        }
-      }
-      altText
-    }
+    aboutText
   }
 }

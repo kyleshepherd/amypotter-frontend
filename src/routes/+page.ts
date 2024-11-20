@@ -11,11 +11,13 @@ export const load = async () => {
   const homeData: {
     heroText: string;
     polaroidImages: Image[];
+    aboutText: string;
   } = {
     heroText: data.data.allHome[0].heroText ?? "",
     polaroidImages:
       data.data.allHome[0].polaroidImages?.map(img => customImageToType(img)) ||
       [],
+    aboutText: data.data.allHome[0].aboutText ?? "",
   };
 
   return homeData;

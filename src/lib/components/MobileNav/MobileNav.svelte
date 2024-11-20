@@ -57,7 +57,7 @@
       {/each}
     </ul>
 
-    <div class="absolute bottom-3 left-3 text-xs">
+    <div class="absolute bottom-3 left-3 text-xs uppercase">
       <span>© {new Date().getFullYear()}</span>
       <span class="block">
         Site by

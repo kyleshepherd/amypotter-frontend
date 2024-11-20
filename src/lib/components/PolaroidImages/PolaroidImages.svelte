@@ -101,6 +101,10 @@
       width: 180,
       height: 270,
     },
+    xs: {
+      width: 180,
+      height: 270,
+    },
     sm: {
       width: 158,
       height: 237,

@@ -16,3 +16,38 @@ query GetHome {
     aboutText
   }
 }
+
+query GetWorkForHome {
+  allWork(sort: [{ orderRank: ASC }]) {
+    title
+    year
+    slug {
+      current
+    }
+    coverImage {
+      img {
+        asset {
+          assetId: _id
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+      altText
+      altText
+    }
+    mainImage {
+      img {
+        asset {
+          assetId: _id
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+      altText
+    }
+  }
+}

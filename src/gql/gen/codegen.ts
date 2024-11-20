@@ -327,10 +327,12 @@ export type RootQuery = {
   Home?: Maybe<Home>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
+  Work?: Maybe<Work>;
   allDocument: Array<Document>;
   allHome: Array<Home>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
+  allWork: Array<Work>;
 };
 
 export type RootQueryDocumentArgs = {
@@ -346,6 +348,10 @@ export type RootQuerySanityFileAssetArgs = {
 };
 
 export type RootQuerySanityImageAssetArgs = {
+  id: Scalars["ID"]["input"];
+};
+
+export type RootQueryWorkArgs = {
   id: Scalars["ID"]["input"];
 };
 
@@ -375,6 +381,13 @@ export type RootQueryAllSanityImageAssetArgs = {
   offset?: InputMaybe<Scalars["Int"]["input"]>;
   sort?: InputMaybe<Array<SanityImageAssetSorting>>;
   where?: InputMaybe<SanityImageAssetFilter>;
+};
+
+export type RootQueryAllWorkArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  offset?: InputMaybe<Scalars["Int"]["input"]>;
+  sort?: InputMaybe<Array<WorkSorting>>;
+  where?: InputMaybe<WorkFilter>;
 };
 
 export type SanityAssetSourceData = {
@@ -802,6 +815,59 @@ export type StringFilter = {
   nin?: InputMaybe<Array<Scalars["String"]["input"]>>;
 };
 
+export type Work = Document & {
+  __typename?: "Work";
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars["DateTime"]["output"]>;
+  /** Document ID */
+  _id?: Maybe<Scalars["ID"]["output"]>;
+  _key?: Maybe<Scalars["String"]["output"]>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars["String"]["output"]>;
+  /** Document type */
+  _type?: Maybe<Scalars["String"]["output"]>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  coverImage?: Maybe<CustomImage>;
+  mainImage?: Maybe<CustomImage>;
+  orderRank?: Maybe<Scalars["String"]["output"]>;
+  slug?: Maybe<Slug>;
+  title?: Maybe<Scalars["String"]["output"]>;
+  year?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type WorkFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  coverImage?: InputMaybe<CustomImageFilter>;
+  mainImage?: InputMaybe<CustomImageFilter>;
+  orderRank?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<SlugFilter>;
+  title?: InputMaybe<StringFilter>;
+  year?: InputMaybe<StringFilter>;
+};
+
+export type WorkSorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  coverImage?: InputMaybe<CustomImageSorting>;
+  mainImage?: InputMaybe<CustomImageSorting>;
+  orderRank?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SlugSorting>;
+  title?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
+};
+
 export type GetHomeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetHomeQuery = {
@@ -845,6 +911,77 @@ export type GetHomeQuery = {
   }>;
 };
 
+export type GetWorkForHomeQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetWorkForHomeQuery = {
+  __typename?: "RootQuery";
+  allWork: Array<{
+    __typename?: "Work";
+    title?: string | null | undefined;
+    year?: string | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
+    coverImage?:
+      | {
+          __typename?: "CustomImage";
+          altText?: string | null | undefined;
+          img?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      assetId?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+                hotspot?:
+                  | {
+                      __typename?: "SanityImageHotspot";
+                      x?: number | null | undefined;
+                      y?: number | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+    mainImage?:
+      | {
+          __typename?: "CustomImage";
+          altText?: string | null | undefined;
+          img?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      assetId?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+                hotspot?:
+                  | {
+                      __typename?: "SanityImageHotspot";
+                      x?: number | null | undefined;
+                      y?: number | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+  }>;
+};
+
 export const GetHome = gql`
   query GetHome {
     allHome {
@@ -862,6 +999,42 @@ export const GetHome = gql`
         altText
       }
       aboutText
+    }
+  }
+`;
+export const GetWorkForHome = gql`
+  query GetWorkForHome {
+    allWork(sort: [{ orderRank: ASC }]) {
+      title
+      year
+      slug {
+        current
+      }
+      coverImage {
+        img {
+          asset {
+            assetId: _id
+          }
+          hotspot {
+            x
+            y
+          }
+        }
+        altText
+        altText
+      }
+      mainImage {
+        img {
+          asset {
+            assetId: _id
+          }
+          hotspot {
+            x
+            y
+          }
+        }
+        altText
+      }
     }
   }
 `;

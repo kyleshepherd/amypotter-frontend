@@ -6,3 +6,11 @@ export type Image = {
     y: number;
   };
 };
+
+export type Work = {
+  title: string;
+  year: string;
+  slug: string;
+  coverImage: Image;
+  mainImage: Image;
+};

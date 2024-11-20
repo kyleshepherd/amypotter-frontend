@@ -1,5 +1,5 @@
-import type { SanityCustomImage } from "../sanityTypes";
-import type { Image } from "../types";
+import type { SanityCustomImage, SanityWork } from "../sanityTypes";
+import type { Image, Work } from "../types";
 import imageUrlBuilder from "@sanity/image-url";
 
 export const customImageToType = (s: SanityCustomImage): Image => {
@@ -10,6 +10,16 @@ export const customImageToType = (s: SanityCustomImage): Image => {
       x: s?.img?.hotspot?.x ?? 0.5,
       y: s?.img?.hotspot?.y ?? 0.5,
     },
+  };
+};
+
+export const workToType = (s: SanityWork): Work => {
+  return {
+    title: s?.title ?? "",
+    year: s?.year ?? "",
+    slug: s?.slug?.current ?? "",
+    coverImage: customImageToType(s?.coverImage),
+    mainImage: customImageToType(s?.mainImage),
   };
 };
 

@@ -8,6 +8,7 @@
 
   export type Sizes = {
     fallback: Dimension;
+    xs: Dimension;
     sm: Dimension;
     md: Dimension;
     lg: Dimension;
@@ -19,7 +20,7 @@
 
   interface Props {
     id: string;
-    altText: string;
+    altText?: string;
     hotspotX: number;
     hotspotY: number;
     sizes: Sizes;
@@ -86,6 +87,10 @@
     media="(min-width: 640px)"
   />
   <source
+    srcset={idToSource(id, sizes.xs.width, sizes.xs.height, hotspotX, hotspotY)}
+    media="(min-width: 480px)"
+  />
+  <source
     srcset={idToSource(
       id,
       sizes.fallback.width,
@@ -93,7 +98,7 @@
       hotspotX,
       hotspotY,
     )}
-    media="(max-width: 639px)"
+    media="(max-width: 479px)"
   />
   <img
     src={builderImageToUrl(

@@ -1,24 +1,36 @@
 import client from "../gql/apolloClient";
-import { GetHome, type GetHomeQuery } from "../gql/gen/codegen";
-import type { Image } from "../types";
-import { customImageToType } from "../utils/sanity";
+import {
+  GetHome,
+  GetWorkForHome,
+  type GetWorkForHomeQuery,
+  type GetHomeQuery,
+} from "../gql/gen/codegen";
+import type { Image, Work } from "../types";
+import { customImageToType, workToType } from "../utils/sanity";
 
 export const load = async () => {
-  const data = await client.query<GetHomeQuery>({
+  const homeData = await client.query<GetHomeQuery>({
     query: GetHome,
   });
 
-  const homeData: {
+  const workData = await client.query<GetWorkForHomeQuery>({
+    query: GetWorkForHome,
+  });
+
+  const data: {
     heroText: string;
     polaroidImages: Image[];
     aboutText: string;
+    work: Work[];
   } = {
-    heroText: data.data.allHome[0].heroText ?? "",
+    heroText: homeData.data.allHome[0].heroText ?? "",
     polaroidImages:
-      data.data.allHome[0].polaroidImages?.map(img => customImageToType(img)) ||
-      [],
-    aboutText: data.data.allHome[0].aboutText ?? "",
+      homeData.data.allHome[0].polaroidImages?.map(img =>
+        customImageToType(img),
+      ) || [],
+    aboutText: homeData.data.allHome[0].aboutText ?? "",
+    work: workData.data.allWork.map(work => workToType(work)) ?? [],
   };
 
-  return homeData;
+  return data;
 };

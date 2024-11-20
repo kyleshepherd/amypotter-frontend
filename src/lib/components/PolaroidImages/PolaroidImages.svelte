@@ -2,6 +2,9 @@
   import type { Image } from "../../../types";
   import { builderImageToUrl, idToSource } from "../../../utils/sanity";
   import { lerp } from "../../../utils/util";
+  import ResponsiveImage, {
+    type Sizes,
+  } from "../ResponsiveImage/ResponsiveImage.svelte";
 
   interface Props {
     images: Image[];
@@ -92,6 +95,41 @@
         return 1;
     }
   };
+
+  const sizes: Sizes = {
+    fallback: {
+      width: 180,
+      height: 270,
+    },
+    sm: {
+      width: 158,
+      height: 237,
+    },
+    md: {
+      width: 203,
+      height: 406,
+    },
+    lg: {
+      width: 293,
+      height: 438,
+    },
+    xl: {
+      width: 332,
+      height: 498,
+    },
+    xxl: {
+      width: 346,
+      height: 519,
+    },
+    xxxl: {
+      width: 416,
+      height: 624,
+    },
+    xxxlPlus: {
+      width: 558,
+      height: 837,
+    },
+  };
 </script>
 
 <svelte:window bind:innerHeight bind:scrollY bind:innerWidth />
@@ -111,101 +149,15 @@
           ]}"
           style={`opacity: ${getOpacity(i)}%;`}
         >
-          <picture>
-            <source
-              srcset={idToSource(
-                image.id,
-                558,
-                837,
-                image.hotspot.x,
-                image.hotspot.y,
-              )}
-              media="(min-width: 1920px)"
-            />
-            <source
-              srcset={idToSource(
-                image.id,
-                416,
-                624,
-                image.hotspot.x,
-                image.hotspot.y,
-              )}
-              media="(min-width: 1600px)"
-            />
-            <source
-              srcset={idToSource(
-                image.id,
-                346,
-                519,
-                image.hotspot.x,
-                image.hotspot.y,
-              )}
-              media="(min-width: 1536px)"
-            />
-            <source
-              srcset={idToSource(
-                image.id,
-                332,
-                498,
-                image.hotspot.x,
-                image.hotspot.y,
-              )}
-              media="(min-width: 1280px)"
-            />
-            <source
-              srcset={idToSource(
-                image.id,
-                293,
-                438,
-                image.hotspot.x,
-                image.hotspot.y,
-              )}
-              media="(min-width: 1024px)"
-            />
-            <source
-              srcset={idToSource(
-                image.id,
-                203,
-                406,
-                image.hotspot.x,
-                image.hotspot.y,
-              )}
-              media="(min-width: 768px)"
-            />
-            <source
-              srcset={idToSource(
-                image.id,
-                158,
-                237,
-                image.hotspot.x,
-                image.hotspot.y,
-              )}
-              media="(min-width: 640px)"
-            />
-            <source
-              srcset={idToSource(
-                image.id,
-                180,
-                270,
-                image.hotspot.x,
-                image.hotspot.y,
-              )}
-              media="(max-width: 639px)"
-            />
-            <img
-              src={builderImageToUrl(
-                image.id,
-                2000,
-                3000,
-                image.hotspot.x,
-                image.hotspot.y,
-                1,
-              )}
-              alt={image.altText}
-              class="h-full transform-gpu sm:h-auto"
-              style={`transform: scale(${getScale(i)});`}
-            />
-          </picture>
+          <ResponsiveImage
+            id={image.id}
+            altText={image.altText ?? ""}
+            hotspotX={image.hotspot.x}
+            hotspotY={image.hotspot.y}
+            {sizes}
+            classes="h-full transform-gpu sm:h-auto"
+            style={`transform: scale(${getScale(i)});`}
+          />
         </div>
       {/each}
     </div>

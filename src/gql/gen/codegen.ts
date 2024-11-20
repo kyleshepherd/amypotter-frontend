@@ -240,8 +240,7 @@ export type Home = Document & {
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   heroText?: Maybe<Scalars["String"]["output"]>;
-  scrollHeroAnchor?: Maybe<Scalars["String"]["output"]>;
-  scrollHeroImage?: Maybe<CustomImage>;
+  polaroidImages?: Maybe<Array<Maybe<CustomImage>>>;
   showcaseImages?: Maybe<Array<Maybe<CustomImage>>>;
 };
 
@@ -255,8 +254,6 @@ export type HomeFilter = {
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
   heroText?: InputMaybe<StringFilter>;
-  scrollHeroAnchor?: InputMaybe<StringFilter>;
-  scrollHeroImage?: InputMaybe<CustomImageFilter>;
 };
 
 export type HomeSorting = {
@@ -267,8 +264,6 @@ export type HomeSorting = {
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
   heroText?: InputMaybe<SortOrder>;
-  scrollHeroAnchor?: InputMaybe<SortOrder>;
-  scrollHeroImage?: InputMaybe<CustomImageSorting>;
 };
 
 export type IdFilter = {
@@ -811,33 +806,36 @@ export type GetHomeQuery = {
   allHome: Array<{
     __typename?: "Home";
     heroText?: string | null | undefined;
-    scrollHeroAnchor?: string | null | undefined;
-    scrollHeroImage?:
-      | {
-          __typename?: "CustomImage";
-          altText?: string | null | undefined;
-          img?:
-            | {
-                __typename?: "Image";
-                asset?:
-                  | {
-                      __typename?: "SanityImageAsset";
-                      assetId?: string | null | undefined;
-                    }
-                  | null
-                  | undefined;
-                hotspot?:
-                  | {
-                      __typename?: "SanityImageHotspot";
-                      x?: number | null | undefined;
-                      y?: number | null | undefined;
-                    }
-                  | null
-                  | undefined;
-              }
-            | null
-            | undefined;
-        }
+    polaroidImages?:
+      | Array<
+          | {
+              __typename?: "CustomImage";
+              altText?: string | null | undefined;
+              img?:
+                | {
+                    __typename?: "Image";
+                    asset?:
+                      | {
+                          __typename?: "SanityImageAsset";
+                          assetId?: string | null | undefined;
+                        }
+                      | null
+                      | undefined;
+                    hotspot?:
+                      | {
+                          __typename?: "SanityImageHotspot";
+                          x?: number | null | undefined;
+                          y?: number | null | undefined;
+                        }
+                      | null
+                      | undefined;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >
       | null
       | undefined;
     showcaseImages?:
@@ -879,7 +877,7 @@ export const GetHome = gql`
   query GetHome {
     allHome {
       heroText
-      scrollHeroImage {
+      polaroidImages {
         img {
           asset {
             assetId: _id
@@ -891,7 +889,6 @@ export const GetHome = gql`
         }
         altText
       }
-      scrollHeroAnchor
       showcaseImages {
         img {
           asset {

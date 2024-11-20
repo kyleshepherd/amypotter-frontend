@@ -1,7 +1,7 @@
 query GetHome {
   allHome {
     heroText
-    scrollHeroImage {
+    polaroidImages {
       img {
         asset {
           assetId: _id
@@ -13,7 +13,6 @@ query GetHome {
       }
       altText
     }
-    scrollHeroAnchor
     showcaseImages {
       img {
         asset {

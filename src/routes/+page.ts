@@ -10,12 +10,12 @@ export const load = async () => {
 
   const homeData: {
     heroText: string;
-    scrollHeroImage: Image;
-    scrollHeroAnchor: string;
+    polaroidImages: Image[];
   } = {
     heroText: data.data.allHome[0].heroText ?? "",
-    scrollHeroImage: customImageToType(data.data.allHome[0].scrollHeroImage),
-    scrollHeroAnchor: data.data.allHome[0].scrollHeroAnchor ?? "top",
+    polaroidImages:
+      data.data.allHome[0].polaroidImages?.map(img => customImageToType(img)) ||
+      [],
   };
 
   return homeData;

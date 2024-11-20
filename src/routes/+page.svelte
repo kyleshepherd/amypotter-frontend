@@ -1,6 +1,6 @@
 <script lang="ts">
   import Hero from "$lib/components/Hero/Hero.svelte";
-  import ScrollHeroImage from "$lib/components/ScrollHeroImage/ScrollHeroImage.svelte";
+  import PolaroidImages from "$lib/components/PolaroidImages/PolaroidImages.svelte";
   import type { PageData } from "./$types";
 
   interface Props {
@@ -11,7 +11,8 @@
 </script>
 
 <Hero introText={data.heroText} />
-<ScrollHeroImage image={data.scrollHeroImage} anchor={data.scrollHeroAnchor} />
+<!-- <ScrollHeroImage image={data.scrollHeroImage} anchor={data.scrollHeroAnchor} /> -->
+<PolaroidImages images={data.polaroidImages} />
 <div class="h-dvh bg-white">
   <h1>just more page content</h1>
 </div>

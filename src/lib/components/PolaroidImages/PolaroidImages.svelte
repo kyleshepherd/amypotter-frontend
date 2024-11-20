@@ -106,7 +106,7 @@
     >
       {#each images as image, i}
         <div
-          class="h-full overflow-hidden border-2 border-[#fff] shadow last:mr-0 sm:h-auto md:border-4 lg:-mr-[36px] xl:border-8 {imgClasses[
+          class="h-full transform-gpu overflow-hidden border-2 border-[#fff] shadow last:mr-0 sm:h-auto md:border-4 lg:-mr-[36px] xl:border-8 {imgClasses[
             i
           ]}"
           style={`opacity: ${getOpacity(i)}%;`}
@@ -121,7 +121,7 @@
               1,
             )}
             alt={image.altText}
-            class="h-full sm:h-auto"
+            class="h-full transform-gpu sm:h-auto"
             style={`transform: scale(${getScale(i)});`}
           />
         </div>

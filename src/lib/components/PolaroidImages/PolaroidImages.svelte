@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Image } from "../../../types";
-  import { builderImageToUrl } from "../../../utils/sanity";
+  import { builderImageToUrl, idToSource } from "../../../utils/sanity";
   import { lerp } from "../../../utils/util";
 
   interface Props {
@@ -111,19 +111,101 @@
           ]}"
           style={`opacity: ${getOpacity(i)}%;`}
         >
-          <img
-            src={builderImageToUrl(
-              image.id,
-              2000,
-              3000,
-              image.hotspot.x,
-              image.hotspot.y,
-              1,
-            )}
-            alt={image.altText}
-            class="h-full transform-gpu sm:h-auto"
-            style={`transform: scale(${getScale(i)});`}
-          />
+          <picture>
+            <source
+              srcset={idToSource(
+                image.id,
+                558,
+                837,
+                image.hotspot.x,
+                image.hotspot.y,
+              )}
+              media="(min-width: 1920px)"
+            />
+            <source
+              srcset={idToSource(
+                image.id,
+                416,
+                624,
+                image.hotspot.x,
+                image.hotspot.y,
+              )}
+              media="(min-width: 1600px)"
+            />
+            <source
+              srcset={idToSource(
+                image.id,
+                346,
+                519,
+                image.hotspot.x,
+                image.hotspot.y,
+              )}
+              media="(min-width: 1536px)"
+            />
+            <source
+              srcset={idToSource(
+                image.id,
+                332,
+                498,
+                image.hotspot.x,
+                image.hotspot.y,
+              )}
+              media="(min-width: 1280px)"
+            />
+            <source
+              srcset={idToSource(
+                image.id,
+                293,
+                438,
+                image.hotspot.x,
+                image.hotspot.y,
+              )}
+              media="(min-width: 1024px)"
+            />
+            <source
+              srcset={idToSource(
+                image.id,
+                203,
+                406,
+                image.hotspot.x,
+                image.hotspot.y,
+              )}
+              media="(min-width: 768px)"
+            />
+            <source
+              srcset={idToSource(
+                image.id,
+                158,
+                237,
+                image.hotspot.x,
+                image.hotspot.y,
+              )}
+              media="(min-width: 640px)"
+            />
+            <source
+              srcset={idToSource(
+                image.id,
+                180,
+                270,
+                image.hotspot.x,
+                image.hotspot.y,
+              )}
+              media="(max-width: 639px)"
+            />
+            <img
+              src={builderImageToUrl(
+                image.id,
+                2000,
+                3000,
+                image.hotspot.x,
+                image.hotspot.y,
+                1,
+              )}
+              alt={image.altText}
+              class="h-full transform-gpu sm:h-auto"
+              style={`transform: scale(${getScale(i)});`}
+            />
+          </picture>
         </div>
       {/each}
     </div>

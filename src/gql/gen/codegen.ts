@@ -828,10 +828,17 @@ export type Work = Document & {
   _type?: Maybe<Scalars["String"]["output"]>;
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
+  artDirector?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
   coverImage?: Maybe<CustomImage>;
+  hair?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+  images?: Maybe<Array<Maybe<CustomImage>>>;
   mainImage?: Maybe<CustomImage>;
+  makeUp?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+  model?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
   orderRank?: Maybe<Scalars["String"]["output"]>;
+  photographer?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
   slug?: Maybe<Slug>;
+  stylist?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
   title?: Maybe<Scalars["String"]["output"]>;
   year?: Maybe<Scalars["String"]["output"]>;
 };
@@ -982,6 +989,85 @@ export type GetWorkForHomeQuery = {
   }>;
 };
 
+export type GetSingleWorkQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+}>;
+
+export type GetSingleWorkQuery = {
+  __typename?: "RootQuery";
+  allWork: Array<{
+    __typename?: "Work";
+    title?: string | null | undefined;
+    year?: string | null | undefined;
+    artDirector?: Array<string | null | undefined> | null | undefined;
+    stylist?: Array<string | null | undefined> | null | undefined;
+    photographer?: Array<string | null | undefined> | null | undefined;
+    model?: Array<string | null | undefined> | null | undefined;
+    makeUp?: Array<string | null | undefined> | null | undefined;
+    hair?: Array<string | null | undefined> | null | undefined;
+    mainImage?:
+      | {
+          __typename?: "CustomImage";
+          altText?: string | null | undefined;
+          img?:
+            | {
+                __typename?: "Image";
+                asset?:
+                  | {
+                      __typename?: "SanityImageAsset";
+                      assetId?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+                hotspot?:
+                  | {
+                      __typename?: "SanityImageHotspot";
+                      x?: number | null | undefined;
+                      y?: number | null | undefined;
+                    }
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined;
+        }
+      | null
+      | undefined;
+    images?:
+      | Array<
+          | {
+              __typename?: "CustomImage";
+              altText?: string | null | undefined;
+              img?:
+                | {
+                    __typename?: "Image";
+                    asset?:
+                      | {
+                          __typename?: "SanityImageAsset";
+                          assetId?: string | null | undefined;
+                        }
+                      | null
+                      | undefined;
+                    hotspot?:
+                      | {
+                          __typename?: "SanityImageHotspot";
+                          x?: number | null | undefined;
+                          y?: number | null | undefined;
+                        }
+                      | null
+                      | undefined;
+                  }
+                | null
+                | undefined;
+            }
+          | null
+          | undefined
+        >
+      | null
+      | undefined;
+  }>;
+};
+
 export const GetHome = gql`
   query GetHome {
     allHome {
@@ -1021,7 +1107,6 @@ export const GetWorkForHome = gql`
           }
         }
         altText
-        altText
       }
       mainImage {
         img {
@@ -1035,6 +1120,44 @@ export const GetWorkForHome = gql`
         }
         altText
       }
+    }
+  }
+`;
+export const GetSingleWork = gql`
+  query GetSingleWork($slug: String) {
+    allWork(where: { slug: { current: { eq: $slug } } }) {
+      title
+      year
+      mainImage {
+        img {
+          asset {
+            assetId: _id
+          }
+          hotspot {
+            x
+            y
+          }
+        }
+        altText
+      }
+      images {
+        img {
+          asset {
+            assetId: _id
+          }
+          hotspot {
+            x
+            y
+          }
+        }
+        altText
+      }
+      artDirector
+      stylist
+      photographer
+      model
+      makeUp
+      hair
     }
   }
 `;

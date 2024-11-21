@@ -43,5 +43,8 @@
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.19.1"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "swiper": "^11.1.15"
+  }
 }

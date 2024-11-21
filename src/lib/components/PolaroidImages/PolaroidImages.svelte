@@ -156,8 +156,8 @@
           <ResponsiveImage
             id={image.id}
             altText={image.altText ?? ""}
-            hotspotX={image.hotspot.x}
-            hotspotY={image.hotspot.y}
+            hotspotX={image?.hotspot?.x}
+            hotspotY={image?.hotspot?.y}
             {sizes}
             classes="h-full transform-gpu sm:h-auto"
             style={`transform: scale(${getScale(i)});`}

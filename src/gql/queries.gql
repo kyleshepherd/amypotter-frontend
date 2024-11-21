@@ -35,7 +35,6 @@ query GetWorkForHome {
         }
       }
       altText
-      altText
     }
     mainImage {
       img {
@@ -49,5 +48,42 @@ query GetWorkForHome {
       }
       altText
     }
+  }
+}
+
+query GetSingleWork($slug: String) {
+  allWork(where: { slug: { current: { eq: $slug } } }) {
+    title
+    year
+    mainImage {
+      img {
+        asset {
+          assetId: _id
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+      altText
+    }
+    images {
+      img {
+        asset {
+          assetId: _id
+        }
+        hotspot {
+          x
+          y
+        }
+      }
+      altText
+    }
+    artDirector
+    stylist
+    photographer
+    model
+    makeUp
+    hair
   }
 }

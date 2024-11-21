@@ -1,15 +1,33 @@
-import type { SanityCustomImage, SanityWork } from "../sanityTypes";
-import type { Image, Work } from "../types";
+import type {
+  SanityCustomImage,
+  SanityHomeWork,
+  SanityWork,
+} from "../sanityTypes";
+import type { Image, HomeWork, Work } from "../types";
 import imageUrlBuilder from "@sanity/image-url";
 
 export const customImageToType = (s: SanityCustomImage): Image => {
-  return {
+  const image: Image = {
     id: s?.img?.asset?.assetId ?? "",
     altText: s?.altText ?? "",
-    hotspot: {
-      x: s?.img?.hotspot?.x ?? 0.5,
-      y: s?.img?.hotspot?.y ?? 0.5,
-    },
+  };
+
+  if (s?.img?.hotspot?.x && s.img.hotspot.y) {
+    image.hotspot = {
+      x: s.img.hotspot.x,
+      y: s.img.hotspot.y,
+    };
+  }
+  return image;
+};
+
+export const homeWorkToType = (s: SanityHomeWork): HomeWork => {
+  return {
+    title: s?.title ?? "",
+    year: s?.year ?? "",
+    slug: s?.slug?.current ?? "",
+    coverImage: customImageToType(s?.coverImage),
+    mainImage: customImageToType(s?.mainImage),
   };
 };
 
@@ -17,9 +35,14 @@ export const workToType = (s: SanityWork): Work => {
   return {
     title: s?.title ?? "",
     year: s?.year ?? "",
-    slug: s?.slug?.current ?? "",
-    coverImage: customImageToType(s?.coverImage),
     mainImage: customImageToType(s?.mainImage),
+    artDirector: s?.artDirector?.map(ad => ad ?? "") || [],
+    model: s?.model?.map(ad => ad ?? "") || [],
+    makeUp: s?.makeUp?.map(ad => ad ?? "") || [],
+    stylist: s?.stylist?.map(ad => ad ?? "") || [],
+    hair: s?.hair?.map(ad => ad ?? "") || [],
+    photographer: s?.photographer?.map(ad => ad ?? "") || [],
+    images: s?.images?.map(img => customImageToType(img)) || [],
   };
 };
 
@@ -32,16 +55,20 @@ export const builderImageToUrl = (
   imageId: string,
   width?: number,
   height?: number,
-  hotspotX: number = 0.5,
-  hotspotY: number = 0.5,
+  hotspotX?: number,
+  hotspotY?: number,
   dpr = 1,
 ): string => {
   let img = builder
     .image(imageId)
     .auto("format")
     .fit("crop")
-    .focalPoint(hotspotX, hotspotY)
-    .dpr(dpr);
+    .dpr(dpr)
+    .quality(80);
+
+  if (hotspotX && hotspotY) {
+    img = img.focalPoint(hotspotX, hotspotY);
+  }
 
   if (width && width !== 0) {
     img = img.width(width);
@@ -65,8 +92,12 @@ export const idToSource = (
     .image(imageId)
     .auto("format")
     .fit("crop")
-    .focalPoint(hotspotX, hotspotY)
-    .dpr(1);
+    .dpr(1)
+    .quality(80);
+
+  if (hotspotX && hotspotY) {
+    imgX1 = imgX1.focalPoint(hotspotX, hotspotY);
+  }
 
   if (width && width !== 0) {
     imgX1 = imgX1.width(width);
@@ -80,8 +111,12 @@ export const idToSource = (
     .image(imageId)
     .auto("format")
     .fit("crop")
-    .focalPoint(hotspotX, hotspotY)
-    .dpr(2);
+    .dpr(2)
+    .quality(80);
+
+  if (hotspotX && hotspotY) {
+    imgX2 = imgX2.focalPoint(hotspotX, hotspotY);
+  }
 
   if (width && width !== 0) {
     imgX2 = imgX2.width(width);

@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { Work } from "../../../types";
+  import type { HomeWork } from "../../../types";
   import ResponsiveImage, {
     type Sizes,
   } from "../ResponsiveImage/ResponsiveImage.svelte";
 
   interface Props {
-    works: Work[];
+    works: HomeWork[];
   }
 
   let { works }: Props = $props();
@@ -146,8 +146,8 @@
           <ResponsiveImage
             id={work.coverImage.id}
             altText={work.coverImage.altText}
-            hotspotX={work.coverImage.hotspot.x}
-            hotspotY={work.coverImage.hotspot.y}
+            hotspotX={work?.coverImage?.hotspot?.x}
+            hotspotY={work?.coverImage?.hotspot?.y}
             sizes={i === 0 && works.length % 2 !== 0
               ? coverBigSizes
               : coverSmallSizes}
@@ -158,17 +158,17 @@
         <div class="absolute inset-0">
           <div class="absolute left-0 right-0 top-0 p-8 text-center sm:p-12">
             <h3
-              class="xs:text-xl mb-2 font-display text-lg sm:text-2xl lg:mb-4 lg:text-3xl xl:text-4xl 2xl:text-5xl"
+              class="mb-2 font-display text-lg xs:text-xl sm:text-2xl lg:mb-4 lg:text-3xl xl:text-4xl 2xl:text-5xl"
             >
               {work.title}
             </h3>
-            <p class="xs:text-base text-sm sm:text-lg lg:text-xl xl:text-2xl">
+            <p class="text-sm xs:text-base sm:text-lg lg:text-xl xl:text-2xl">
               {work.year}
             </p>
           </div>
           <div class="absolute inset-0 flex items-center justify-center">
             <div
-              class="xs:max-w-[65%] aspect-[5/7] w-full max-w-[55%] overflow-hidden sm:max-w-[65%] lg:max-w-[260px] xl:max-w-[350px] 2xl:max-w-[475px] 3xl:max-w-[500px] 4xl:max-w-[660px] {i ===
+              class="aspect-[5/7] w-full max-w-[55%] overflow-hidden xs:max-w-[65%] sm:max-w-[65%] lg:max-w-[260px] xl:max-w-[350px] 2xl:max-w-[475px] 3xl:max-w-[500px] 4xl:max-w-[660px] {i ===
                 0 && works.length % 2 !== 0
                 ? 'md:max-w-[25%]'
                 : 'md:max-w-[50%]'}"
@@ -176,8 +176,8 @@
               <ResponsiveImage
                 id={work.mainImage.id}
                 altText={work.mainImage.altText}
-                hotspotX={work.mainImage.hotspot.x}
-                hotspotY={work.mainImage.hotspot.y}
+                hotspotX={work?.mainImage?.hotspot?.x}
+                hotspotY={work?.mainImage?.hotspot?.y}
                 sizes={mainSizes}
                 classes="w-full group-hover:scale-105 transform-gpu transition-transform duration-500"
                 lazy={true}

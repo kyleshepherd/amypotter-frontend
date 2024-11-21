@@ -5,8 +5,8 @@ import {
   type GetWorkForHomeQuery,
   type GetHomeQuery,
 } from "../gql/gen/codegen";
-import type { Image, Work } from "../types";
-import { customImageToType, workToType } from "../utils/sanity";
+import type { HomeWork, Image } from "../types";
+import { customImageToType, homeWorkToType } from "../utils/sanity";
 
 export const load = async () => {
   const homeData = await client.query<GetHomeQuery>({
@@ -21,7 +21,7 @@ export const load = async () => {
     heroText: string;
     polaroidImages: Image[];
     aboutText: string;
-    work: Work[];
+    work: HomeWork[];
   } = {
     heroText: homeData.data.allHome[0].heroText ?? "",
     polaroidImages:
@@ -29,7 +29,7 @@ export const load = async () => {
         customImageToType(img),
       ) || [],
     aboutText: homeData.data.allHome[0].aboutText ?? "",
-    work: workData.data.allWork.map(work => workToType(work)) ?? [],
+    work: workData.data.allWork.map(work => homeWorkToType(work)) ?? [],
   };
 
   return data;

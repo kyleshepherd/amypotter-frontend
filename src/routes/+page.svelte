@@ -4,6 +4,7 @@
   import HomeWork from "$lib/components/HomeWork/HomeWork.svelte";
   import PolaroidImages from "$lib/components/PolaroidImages/PolaroidImages.svelte";
   import type { PageData } from "./$types";
+  import Footer from "$lib/components/Footer/Footer.svelte";
 
   interface Props {
     data: PageData;
@@ -17,3 +18,4 @@
 <PolaroidImages images={polaroidImages} />
 <HomeAbout text={aboutText} />
 <HomeWork works={data.work} />
+<Footer />

@@ -21,8 +21,8 @@
   interface Props {
     id: string;
     altText?: string;
-    hotspotX: number;
-    hotspotY: number;
+    hotspotX?: number;
+    hotspotY?: number;
     sizes: Sizes;
     classes?: string;
     style?: string;
@@ -32,8 +32,8 @@
   let {
     id,
     altText,
-    hotspotX = 0.5,
-    hotspotY = 0.5,
+    hotspotX,
+    hotspotY,
     sizes,
     classes,
     style,

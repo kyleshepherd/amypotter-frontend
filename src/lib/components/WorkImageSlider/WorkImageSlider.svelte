@@ -29,7 +29,7 @@
       },
       mousewheel: {
         sensitivity: 2,
-        eventsTarget: "body",
+        eventsTarget: "div.contents",
       },
     });
   });

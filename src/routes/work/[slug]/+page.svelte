@@ -26,7 +26,14 @@
   />
   <meta
     property="og:image"
-    content="https://amypotter.vercel.app/work/{work.slug}"
+    content={builderImageToUrl(
+      work.mainImage.id,
+      1200,
+      628,
+      work?.mainImage?.hotspot?.x,
+      work?.mainImage?.hotspot?.y,
+      1,
+    )}
   />
   <meta property="twitter:card" content="summary_large_image" />
   <meta

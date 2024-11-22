@@ -14,6 +14,21 @@
   let { polaroidImages, heroText, aboutText } = data;
 </script>
 
+<svelte:head>
+  <meta name="title" content="Amy Potter - Shoot Producer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://amypotter.vercel.app/" />
+  <meta property="og:title" content="Amy Potter - Shoot Producer" />
+  <meta property="og:image" content="https://amypotter.vercel.app/og.png" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://amypotter.vercel.app/" />
+  <meta property="twitter:title" content="Amy Potter - Shoot Producer" />
+  <meta
+    property="twitter:image"
+    content="https://amypotter.vercel.app/og.png"
+  />
+</svelte:head>
+
 <Hero introText={heroText} />
 <PolaroidImages images={polaroidImages} />
 <HomeAbout text={aboutText} />

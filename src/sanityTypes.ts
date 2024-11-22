@@ -104,6 +104,13 @@ export type SanityWork =
       __typename?: "Work";
       title?: string | null | undefined;
       year?: string | null | undefined;
+      slug?:
+        | {
+            __typename?: "Slug";
+            current?: string | null | undefined;
+          }
+        | null
+        | undefined;
       mainImage?:
         | {
             __typename?: "CustomImage";

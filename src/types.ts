@@ -18,6 +18,7 @@ export type HomeWork = {
 export type Work = {
   title: string;
   year: string;
+  slug: string;
   mainImage: Image;
   artDirector: string[];
   stylist: string[];

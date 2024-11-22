@@ -55,6 +55,9 @@ query GetSingleWork($slug: String) {
   allWork(where: { slug: { current: { eq: $slug } } }) {
     title
     year
+    slug {
+      current
+    }
     mainImage {
       img {
         asset {
@@ -85,5 +88,11 @@ query GetSingleWork($slug: String) {
     model
     makeUp
     hair
+  }
+}
+
+query GetAboutText {
+  allHome {
+    aboutText
   }
 }

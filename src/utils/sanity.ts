@@ -35,6 +35,7 @@ export const workToType = (s: SanityWork): Work => {
   return {
     title: s?.title ?? "",
     year: s?.year ?? "",
+    slug: s?.slug?.current ?? "",
     mainImage: customImageToType(s?.mainImage),
     artDirector: s?.artDirector?.map(ad => ad ?? "") || [],
     model: s?.model?.map(ad => ad ?? "") || [],

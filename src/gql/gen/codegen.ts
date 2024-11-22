@@ -1005,6 +1005,10 @@ export type GetSingleWorkQuery = {
     model?: Array<string | null | undefined> | null | undefined;
     makeUp?: Array<string | null | undefined> | null | undefined;
     hair?: Array<string | null | undefined> | null | undefined;
+    slug?:
+      | { __typename?: "Slug"; current?: string | null | undefined }
+      | null
+      | undefined;
     mainImage?:
       | {
           __typename?: "CustomImage";
@@ -1068,6 +1072,16 @@ export type GetSingleWorkQuery = {
   }>;
 };
 
+export type GetAboutTextQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAboutTextQuery = {
+  __typename?: "RootQuery";
+  allHome: Array<{
+    __typename?: "Home";
+    aboutText?: string | null | undefined;
+  }>;
+};
+
 export const GetHome = gql`
   query GetHome {
     allHome {
@@ -1128,6 +1142,9 @@ export const GetSingleWork = gql`
     allWork(where: { slug: { current: { eq: $slug } } }) {
       title
       year
+      slug {
+        current
+      }
       mainImage {
         img {
           asset {
@@ -1158,6 +1175,13 @@ export const GetSingleWork = gql`
       model
       makeUp
       hair
+    }
+  }
+`;
+export const GetAboutText = gql`
+  query GetAboutText {
+    allHome {
+      aboutText
     }
   }
 `;

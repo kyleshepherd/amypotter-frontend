@@ -57,7 +57,10 @@
   />
 </svelte:head>
 
-<div class="fixed inset-0 flex h-dvh w-dvw flex-col">
+<div
+  class="fixed inset-0 flex h-dvh w-dvw transform-gpu flex-col"
+  id="work-container"
+>
   <WorkImageSlider images={work.images} />
   <WorkFooter {work} />
 </div>
